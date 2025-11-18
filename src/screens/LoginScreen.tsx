@@ -11,6 +11,7 @@ export default function LoginScreen({ navigation }: any) {
   const handleLogin = () => {
     const result = loginUser(email, password);
     alert(result.message);
+    navigation.navigate("MisPagos");
 
     if (result.ok) {
       // Aquí podrías navegar al home

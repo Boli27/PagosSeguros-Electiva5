@@ -12,7 +12,7 @@ export const registerUser = (name: string, email: string, password: string) => {
     return { ok: false, message: "El correo debe tener al menos 4 caracteres" };
   }
 
-   if (name.trim().length < 4) {
+  if (name.trim().length < 4) {
     return { ok: false, message: "El nombre debe tener al menos 4 caracteres" };
   }
 
