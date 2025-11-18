@@ -22,7 +22,7 @@ export const registerUser = (name: string, email: string, password: string) => {
   const newUser = { id: Date.now(), name, email , password };
   users.push(newUser);
 
-  return { ok: true, message: "Usuario registrado", user: newUser };
+  return { ok: true, message: "Usuario registrado", user: newUser , usuarios: users};
 };
 
 export const loginUser = (email: string, password: string) => {

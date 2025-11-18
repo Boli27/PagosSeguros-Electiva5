@@ -12,8 +12,9 @@ export default function RegisterScreen({ navigation }: any) {
   const handleRegister = () => {
     const result = registerUser(name, email.toLowerCase(), pass);
 
-    alert(result.message);
-
+    if (!result.ok) {
+      alert(result.message);
+    }
     if (result.ok) {
       navigation.navigate("Login");
     }
