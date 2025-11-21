@@ -1,41 +1,80 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function BottomNavBar() {
   const navigation = useNavigation<any>();
+  const route = useRoute();
+
+  const current = route.name;
 
   return (
     <View style={styles.container}>
+      
+      {/* INICIO */}
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate("MisPagos")}
       >
-        <Ionicons name="home" size={22} color="#007BFF" />
-        <Text style={styles.active}>Inicio</Text>
+        <Ionicons
+          name="home"
+          size={22}
+          color={current === "MisPagos" ? "#007BFF" : "#999"}
+        />
+        <Text
+          style={current === "MisPagos" ? styles.active : styles.inactive}
+        >
+          Inicio
+        </Text>
       </TouchableOpacity>
 
+      {/* HISTORIAL */}
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate("HistorialPagos")}
       >
-        <Ionicons name="time" size={22} color="#999" />
-        <Text style={styles.inactive}>Historial</Text>
+        <Ionicons
+          name="time"
+          size={22}
+          color={current === "HistorialPagos" ? "#007BFF" : "#999"}
+        />
+        <Text
+          style={current === "HistorialPagos" ? styles.active : styles.inactive}
+        >
+          Historial
+        </Text>
       </TouchableOpacity>
 
+      {/* RESUMEN */}
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate("ResumenPagos")}
       >
-        <Ionicons name="bar-chart" size={22} color="#999" />
-        <Text style={styles.inactive}>Resumen</Text>
+        <Ionicons
+          name="bar-chart"
+          size={22}
+          color={current === "ResumenPagos" ? "#007BFF" : "#999"}
+        />
+        <Text
+          style={current === "ResumenPagos" ? styles.active : styles.inactive}
+        >
+          Resumen
+        </Text>
       </TouchableOpacity>
 
+      {/* PERFIL */}
       <TouchableOpacity style={styles.navItem}>
-        <Ionicons name="person" size={22} color="#999" />
-        <Text style={styles.inactive}>Perfil</Text>
+        <Ionicons
+          name="person"
+          size={22}
+          color={current === "Perfil" ? "#007BFF" : "#999"}
+        />
+        <Text style={current === "Perfil" ? styles.active : styles.inactive}>
+          Perfil
+        </Text>
       </TouchableOpacity>
+
     </View>
   );
 }

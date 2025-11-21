@@ -26,8 +26,9 @@ export default function AppNavigator() {
 
         {/*Pantalla HOME - Mis Pagos*/}
         <Stack.Screen name="MisPagos" component={MisPagosScreen} />
-        <Stack.Screen name="DetallesPago" component={MisPagosScreen} />
         <Stack.Screen name="AddPago" component={AddPagoScreen} />
+
+        {/*Pantalla Historial*/}
         <Stack.Screen name="HistorialPagos" component={HistorialPagosScreen} />
 <Stack.Screen 
   name="ResumenPagos" 

@@ -31,3 +31,8 @@ export const marcarComoPagado = (id: string) => {
     pago.estado = "Pagado";
   }
 };
+
+export const getPagosPagados = () => {
+  return pagos.filter(p => p.estado === "Pagado");
+};
+
