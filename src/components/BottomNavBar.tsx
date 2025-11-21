@@ -16,10 +16,11 @@ export default function BottomNavBar() {
         <Text style={styles.active}>Inicio</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navItem}>
-        <Ionicons name="time" size={22} color="#999" />
-        <Text style={styles.inactive}>Historial</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate("HistorialPagos")}>
+          <Ionicons name="time" size={22} color="#999" />
+          <Text style={styles.inactive}>Historial</Text>
+        </TouchableOpacity>
+
 
       <TouchableOpacity style={styles.navItem}>
         <Ionicons name="bar-chart" size={22} color="#999" />
