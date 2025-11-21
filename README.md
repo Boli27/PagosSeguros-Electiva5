@@ -16,3 +16,8 @@ fue mejorado para que sea mas adaptable a distintos tipos como ingreo de frechas
 Tambien se realizo la distribucion de diferentes componentes como la barra de navegacion inferior, el modal de los
 detalles de un pago con la capacidad de asignar un pago como "Pagado", las cards de los items de los pagos y un
 pago deatils para ubicar diferentes mensajes compuestos por un titulo y un valor
+
+Cambios por Angie Minota (Historial de Pagos)
+Creé la pantalla Historial de Pagos.
+Implementé la lista de pagos y el modal de detalles.
+Ajusté navegación e integré el servicio de pagos.
