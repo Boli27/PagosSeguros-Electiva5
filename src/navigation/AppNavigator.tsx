@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HistorialPagosScreen from "../screens/HistorialPagosScreen";
+import ResumenPagosScreen from "../screens/ResumenPagosScreen";
 
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
@@ -28,7 +29,11 @@ export default function AppNavigator() {
         <Stack.Screen name="DetallesPago" component={MisPagosScreen} />
         <Stack.Screen name="AddPago" component={AddPagoScreen} />
         <Stack.Screen name="HistorialPagos" component={HistorialPagosScreen} />
-
+<Stack.Screen 
+  name="ResumenPagos" 
+  component={ResumenPagosScreen}
+  options={{ headerShown: false }}
+/>
                 
       </Stack.Navigator>
     </NavigationContainer>
