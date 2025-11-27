@@ -30,11 +30,9 @@ export default function AppNavigator() {
 
         {/*Pantalla Historial*/}
         <Stack.Screen name="HistorialPagos" component={HistorialPagosScreen} />
-<Stack.Screen 
-  name="ResumenPagos" 
-  component={ResumenPagosScreen}
-  options={{ headerShown: false }}
-/>
+
+        {/* Resumen Pagps*/}
+        <Stack.Screen name="ResumenPagos" component={ResumenPagosScreen} />
                 
       </Stack.Navigator>
     </NavigationContainer>

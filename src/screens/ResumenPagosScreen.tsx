@@ -1,150 +1,300 @@
-import React from "react"; 
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
-import { BarChart } from "react-native-chart-kit";
+import React, { useState } from "react";
+import {
+  View,
+  ScrollView,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { LineChart, BarChart } from "react-native-chart-kit";
+import BottomNavBar from "../components/BottomNavBar";
+
+import {
+  getPendientesDelMes,
+  getPagosPagadosDelMes,
+  getTotalDelMes,
+  getResumenDelMes,
+} from "../service/pagosService";
+
+const MESES = [
+  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
 
 export default function ResumenPagosScreen() {
-  const navigation = useNavigation<any>();
-  const screenWidth = Dimensions.get("window").width - 40;
+  const [mesSeleccionado, setMesSeleccionado] = useState(new Date().getMonth() + 1);
 
-  const data = {
-    labels: ["Comida", "Transporte", "Servicios", "Membresías"],
-    datasets: [
-      {
-        data: [245000, 180000, 450000, 120000],
-      },
-    ],
+  const pendientes = getPendientesDelMes(mesSeleccionado);
+  const pagados = getPagosPagadosDelMes(mesSeleccionado);
+  const total = getTotalDelMes(mesSeleccionado);
+  const resumen = getResumenDelMes(mesSeleccionado);
+
+
+  const width = Dimensions.get("window").width - 40;
+
+  // Si no hay items, devolver una estructura válida para la gráfica
+  const buildChartData = (items: any[]) => {
+    if (!items || items.length === 0) {
+      return {
+        labels: [""],
+        datasets: [{ data: [0] }],
+      };
+    }
+
+    return {
+      labels: items.map((i) => (i.nombre.length > 12 ? i.nombre.slice(0, 12) + "…" : i.nombre)),
+      datasets: [{ data: items.map((i) => i.valor) }],
+    };
   };
 
   return (
-    <View style={styles.safe}>
+    <View style={styles.container}>
+      <Text style={styles.title}>Resumen de {MESES[mesSeleccionado - 1]}</Text>
 
-      {/* Header superior */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.headerBack} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={26} color="#fff" />
-        </TouchableOpacity>
+      {/* Selector de mes */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.mesesScroll}
+        contentContainerStyle={styles.mesesContent}
+      >
+        {MESES.map((m, index) => {
+          const active = index + 1 === mesSeleccionado;
+          return (
+            <TouchableOpacity
+              key={index}
+              style={[styles.mesButton, active && styles.mesButtonActive]}
+              onPress={() => setMesSeleccionado(index + 1)}
+              activeOpacity={0.8}
+            >
+              <Text style={[styles.mesText, active && styles.mesTextActive]}>
+                {m.slice(0, 3)}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
 
-        <Text style={styles.headerTitle}>Resumen de Octubre</Text>
-      </View>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
 
-      <ScrollView contentContainerStyle={styles.scroll}>
-        
-        {/* TARJETA DE MAYOR GASTO */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Tu mayor gasto</Text>
+        {/* Pagos pendientes (ROJO) */}
+        <Text style={styles.chartTitle}>Pagos pendientes</Text>
+        <LineChart
+          data={buildChartData(pendientes)}
+          width={width}
+          height={220}
+          yAxisLabel="$"
+          yAxisSuffix=""
+          chartConfig={chartRed}
+          style={styles.chartBox}
+          bezier
+        />
 
-          <BarChart
-            data={data}
-            width={screenWidth}
-            height={280}
-            fromZero
-            showValuesOnTopOfBars
-            chartConfig={{
-              backgroundColor: "#fff",
-              backgroundGradientFrom: "#fff",
-              backgroundGradientTo: "#fff",
-              decimalPlaces: 0,
-              color: () => "#1E4BA8",
-              labelColor: () => "#6A6A6A",
-              barPercentage: 0.7,
-            }}
-            style={{ marginVertical: 8, borderRadius: 10 }}
-          />
-        </View>
+        {/* Pagos pagados (AZUL) */}
+        <Text style={styles.chartTitle}>Pagos pagados</Text>
+        <BarChart
+          data={buildChartData(pagados)}
+          width={width}
+          height={220}
+          yAxisLabel="$"
+          yAxisSuffix=""
+          chartConfig={chartBlue}
+          style={styles.chartBox}
+          fromZero
+        />
 
-        {/* TARJETA DE RESUMEN */}
-        <View style={styles.cardInfo}>
-          <Text style={styles.infoText}>
-            <Text style={styles.bold}>Total Pagado este mes: </Text>$ 1.300.000
+        {/* Totales (MORADO) */}
+        <Text style={styles.chartTitle}>Todos los pagos</Text>
+        <LineChart
+          data={buildChartData(total)}
+          width={width}
+          height={220}
+          yAxisLabel="$"
+          yAxisSuffix=""
+          chartConfig={chartPurple}
+          style={styles.chartBoxBottom}
+          bezier
+        />
+
+        {/* Resumen texto */}
+        <View style={styles.resumenBox}>
+          <Text style={styles.resumenTitle}>Resumen del mes</Text>
+
+          <Text style={styles.resumenText}>
+            Total Pagado este mes:   <Text style={styles.resumenBold}>${resumen.totalPagado.toLocaleString()}</Text>
           </Text>
 
-          <Text style={styles.infoText}>
-            <Text style={styles.bold}>Total Pendiente: </Text>$ 120.000
+          <Text style={styles.resumenText}>
+            Total Pendiente:         <Text style={styles.resumenBold}>${resumen.totalPendiente.toLocaleString()}</Text>
           </Text>
 
-          <Text style={styles.infoText}>
-            <Text style={styles.bold}>Pagos Realizados: </Text>5 de 7 pagos
+          <Text style={styles.resumenText}>
+            Pagos Realizados:        <Text style={styles.resumenBold}>{resumen.cantidadPagados} de {resumen.cantidadTotal} pagos</Text>
           </Text>
         </View>
 
       </ScrollView>
+
+
+      <BottomNavBar />
     </View>
   );
 }
 
+/* ---------------- chart configs ---------------- */
+
+const chartRed = {
+  backgroundColor: "#7F1D1D",
+  backgroundGradientFrom: "#B91C1C",
+  backgroundGradientTo: "#EF4444",
+  decimalPlaces: 0,
+  color: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+  labelColor: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+  style: {
+    borderRadius: 12,
+  },
+  propsForDots: {
+    r: "4",
+    strokeWidth: "2",
+    stroke: "#FFF",
+  },
+};
+
+const chartBlue = {
+  backgroundColor: "#0B3D91",
+  backgroundGradientFrom: "#1E40AF",
+  backgroundGradientTo: "#3B82F6",
+  decimalPlaces: 0,
+  color: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+  labelColor: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+  style: {
+    borderRadius: 12,
+  },
+};
+
+const chartPurple = {
+  backgroundColor: "#4C1D95",
+  backgroundGradientFrom: "#6D28D9",
+  backgroundGradientTo: "#A78BFA",
+  decimalPlaces: 0,
+  color: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+  labelColor: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+  style: {
+    borderRadius: 12,
+  },
+};
+
+/* ---------------- styles ---------------- */
+
 const styles = StyleSheet.create({
-  safe: {
+  container: {
     flex: 1,
-    backgroundColor: "#EAF3FF",
-  },
-
-  header: {
-    width: "100%",
-    backgroundColor: "#3D8BFF",
-    paddingVertical: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
-  },
-
-  headerBack: {
-    position: "absolute",
-    left: 20,
-    top: 50,
-  },
-
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#fff",
-  },
-
-  scroll: {
+    backgroundColor: "#FFF",
+    paddingTop: 60,
     paddingHorizontal: 20,
-    paddingBottom: 40,
-    marginTop: 15,
   },
 
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 20,
-    elevation: 4,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-  },
-
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#0B2B48",
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#0056B3",
     marginBottom: 12,
   },
 
-  cardInfo: {
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    padding: 20,
-    elevation: 4,
+  mesesScroll: {
+    marginBottom: 8,
+  },
+
+  mesesContent: {
+    paddingVertical: 6,
+    paddingRight: 10,
+    alignItems: "center",
+  },
+
+  mesButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 14,  // ← MÁS ESPACIO
+    backgroundColor: "#F3F4F6",
+    borderRadius: 14,
+    minHeight: 38,
+    marginRight: 10,
+  },
+
+
+  mesButtonActive: {
+    backgroundColor: "#1E6CFB",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 3,
   },
 
-  infoText: {
-    fontSize: 16,
-    marginBottom: 6,
-    color: "#222",
+  mesText: {
+    color: "#333",
+    fontWeight: "600",
+    fontSize: 15,
   },
-
-  bold: {
+  mesTextActive: {
+    color: "#FFF",
     fontWeight: "700",
+    fontSize: 15,
   },
+
+
+  scrollContent: {
+    paddingBottom: 140,
+  },
+
+  chartTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 10,
+    marginTop: 8,
+    color: "#333",
+  },
+
+  chartBox: {
+    borderRadius: 12,
+    marginBottom: 22,
+  },
+
+  chartBoxBottom: {
+    borderRadius: 12,
+    marginBottom: 40,
+  },
+  resumenBox: {
+  backgroundColor: "#FFF",
+  padding: 15,
+  borderRadius: 12,
+  marginHorizontal: 10,
+  marginTop: 15,
+  elevation: 3,
+  shadowColor: "#000",
+  shadowOpacity: 0.1,
+  shadowRadius: 5,
+  shadowOffset: { width: 0, height: 2 },
+},
+
+resumenTitle: {
+  fontSize: 18,
+  fontWeight: "700",
+  color: "#1E40AF",
+  marginBottom: 10,
+},
+
+resumenText: {
+  fontSize: 15,
+  marginBottom: 6,
+  color: "#333",
+},
+
+resumenBold: {
+  fontWeight: "bold",
+  color: "#000",
+},
+
 });
+
+
