@@ -110,7 +110,7 @@ export default function AddPagoScreen() {
 
             {/* 🔽 Botón más abajo */}
             <View style={styles.bottomButton}>
-                <PrimaryButton title="Agregar Pago" onPress={handleAgregarPago} />
+                <PrimaryButton text="Agregar Pago" onPress={handleAgregarPago} />
             </View>
 
         </View>

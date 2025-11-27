@@ -1,8 +1,9 @@
 import React from "react";
-import { View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 type Props = {
+  label?: string;
   placeholder: string;
   value: string;
   onChangeText?: (t: string) => void;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export default function CustomInput({
+  label,
   placeholder,
   value,
   onChangeText,
@@ -25,6 +27,8 @@ export default function CustomInput({
 }: Props) {
   return (
     <View style={styles.container}>
+
+      {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         placeholder={placeholder}
         placeholderTextColor="#999"
@@ -63,5 +67,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 12,
     top: 12,
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 6,
   },
 });
