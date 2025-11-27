@@ -4,29 +4,24 @@ Este sera el codigo para el proyecto Pago Seguro, en react native para aplicacio
     - **Visualizacion de calendario de pagos proximos**
     - **Dashboard de los gastos mensuales, con graficas para identificar los gastos mas grandes**
 
-De primeros avances de la aplicaicon movil de PagoSeguro se realizaron los siguientes componentes y elementos de la App:
+**Actualizacion 1**
 
-Actualizacion 1
+Realizacion de login/register e implementacion de navegacion
 
-    Realizacion de login/register e implementacion de navegacion
+**Actualizacion 2**
 
-Actualizacion 2
+Realizacion de la screen de home utilizando el service de pagos y componente tales como PagoCard para cada 
+item de los pagos, el PagoDetailModal que es la ventana emergente cuando se quiere ver los detalles de un pago, el navbar para reutilizar la navegacion por la app y el TotalBox para el texto informativo de los pagos
 
-Tambien se realizo la distribucion de diferentes componentes como la barra de navegacion inferior, el modal de los detalles de un pago con la capacidad de asignar un pago como "Pagado", las cards de los items de los pagos y un pago deatils para ubicar diferentes mensajes compuestos por un titulo y un valor
+**Actualizacion 3**
 
-    - **Se Creo por primera parte la pantalla inicial correspondiente al login donde el usuario puede
-        loguearse con su cuenta o tambien se le es permitido registrarse**
-    - **Como se dijo el usuario puede registrarse en la aplciacion,por lo que se creo tambien la pantalla del formulario de registro**
-    - **se realizo la creación del mockup de la pantalla Mispagos, donde se evidencian los pagos recientes con su respectiva información detalles 
-        además, se agregó una ventana modal (Modal) que muestra más detalles del pago seleccionado, incluyendo nombre, estado, prioridad, valor 
-        y fecha de vencimiento.También se ajustó la navegación para integrar correctamente esta nueva pantalla.**
-    - **Se realizo el screen de agregar pago, reutilizando los componentes de input y buttom, el componente de input
-        fue mejorado para que sea mas adaptable a distintos tipos como ingreo de frechas, numeros y seleccionables.**
-    - **Tambien se realizo la distribucion de diferentes componentes como la barra de navegacion inferior, el modal de los 
-        detalles de un pago con la capacidad de asignar un pago como "Pagado", las cards de los items de los pagos y un
-        pago deatils para ubicar diferentes mensajes compuestos por un titulo y un valor**
+Se realizo el screen de agregar pago, reutilizando los componentes de input y buttom, el componente de input
+fue mejorado para que sea mas adaptable a distintos tipos como ingreo de frechas, numeros y seleccionables.
 
-Actualizacion 3
+Tambien se realizo la distribucion de diferentes componentes como la barra de navegacion inferior, el modal de los
+detalles de un pago con la capacidad de asignar un pago como "Pagado", las cards de los items de los pagos y un
+pago deatils para ubicar diferentes mensajes compuestos por un titulo y un valor
 
-    Se realizo el screen de agregar pago, reutilizando los componentes de input y buttom, el componente de input fue mejorado para que sea mas adaptable a distintos tipos como ingreo de frechas, numeros y             seleccionables.
+**Actualizacion 4**
 
+Realizacion de historial con una funcion dentro del service para solo consultar pagos ya pagados y reutilizando los componentes de PagoCard, PagoDetailModal y BottomNavBar
