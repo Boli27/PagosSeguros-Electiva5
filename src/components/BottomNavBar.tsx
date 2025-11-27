@@ -48,7 +48,6 @@ export default function BottomNavBar() {
 
       {/* RESUMEN */}
       <TouchableOpacity
-        style={styles.navItem}
         onPress={() => navigation.navigate("ResumenPagos")}
       >
         <Ionicons
@@ -64,13 +63,15 @@ export default function BottomNavBar() {
       </TouchableOpacity>
 
       {/* PERFIL */}
-      <TouchableOpacity style={styles.navItem}>
+      <TouchableOpacity style={styles.item}
+        onPress={() => navigation.navigate("PerfilUsuario")}
+      >
         <Ionicons
           name="person"
           size={22}
-          color={current === "Perfil" ? "#007BFF" : "#999"}
+          color={current === "PerfilUsuario" ? "#007BFF" : "#999"}
         />
-        <Text style={current === "Perfil" ? styles.active : styles.inactive}>
+        <Text style={current === "PerfilUsuario" ? styles.active : styles.inactive}>
           Perfil
         </Text>
       </TouchableOpacity>
@@ -105,4 +106,7 @@ const styles = StyleSheet.create({
     color: "#999",
     fontSize: 12,
   },
+  item:{
+    alignItems: "center",
+  }
 });

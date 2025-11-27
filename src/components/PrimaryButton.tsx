@@ -1,10 +1,18 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, ViewStyle } from "react-native";
+//import { ViewStyle } from "react-native/types_generated/index";
+//import { View } from "react-native/types_generated/index";
 
-export default function PrimaryButton({ title, onPress }: any) {
+interface Props{
+  text: string;
+  onPress: () => void;
+  style?: ViewStyle;
+}
+
+export default function PrimaryButton({ text, style, onPress }: any) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
 }

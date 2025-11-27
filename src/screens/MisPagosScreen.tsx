@@ -66,7 +66,7 @@ export default function MisPagosScreen({ navigation }: any) {
 
             <View style={styles.buttonWrapper}>
                 <PrimaryButton
-                    title="Nuevo Pago"
+                    text="Nuevo Pago"
                     onPress={() => navigation.navigate("AddPago")}
                 />
             </View>
