@@ -1,4 +1,4 @@
-Este sera el codigo para el proyecto Pagos Seguros, en react native para aplicaciones moviles. Con funcionalidades como:
+Este sera el codigo para el proyecto Pago Seguro, en react native para aplicaciones moviles. Con funcionalidades como:
 
     - **Registro de pago recurrentes**
     - **Visualizacion de calendario de pagos proximos**
