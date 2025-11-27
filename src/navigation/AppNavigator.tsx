@@ -11,6 +11,8 @@ import MisPagosScreen from "../screens/MisPagosScreen";
 import { RootStackParamList } from "./types";
 import AddPagoScreen from "../screens/AddPagoScreen";
 
+import { PerfilUsuarioScreen } from "../screens/PerfilUsuarioScreen";
+import EditarPerfilScreen from "../screens/EditarPerfilScreen"
 const Stack = createStackNavigator();
 
 export default function AppNavigator() {
@@ -30,9 +32,6 @@ export default function AppNavigator() {
 
         {/*Pantalla Historial*/}
         <Stack.Screen name="HistorialPagos" component={HistorialPagosScreen} />
-
-        {/* Resumen Pagps*/}
-        <Stack.Screen name="ResumenPagos" component={ResumenPagosScreen} />
                 
       </Stack.Navigator>
     </NavigationContainer>
