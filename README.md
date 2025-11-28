@@ -27,13 +27,11 @@ Cambios por Angie Minota (Historial de Pagos)
 
 ---
 
-## 👥 Equipo de Desarrollo
+## 🧑‍💻 Autores
+- **Juan Diego Eraso Muñoz**  
+- **Jaime Santiago Salazar Gil**  
+- **Angie Nicol Hurtado Minota (Angie Minota)**  
 
-| Integrante | Rol |
-|-----------|------|
-| **Juan Diego Eraso Muñoz** 
-| **Jaime Santiago Salazar Gil** 
-| **Angie Nicol Hurtado Minota** 
 ---
 
 ## 📂 Estructura del Proyecto
