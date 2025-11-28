@@ -27,7 +27,8 @@ pago deatils para ubicar diferentes mensajes compuestos por un titulo y un valor
 Realizacion de historial con una funcion dentro del service para solo consultar pagos ya pagados y reutilizando los componentes de PagoCard, PagoDetailModal y BottomNavBar
 
 **Actualizacion 5**
-Se implementa la pantalla de Perfil de Usuario, incluyendo:
+
+-Se implementa la pantalla de Perfil de Usuario, incluyendo:
 
 PerfilUsuarioScreen y EditarPerfilScreen completas.
 PrimaryButton corregido para que acepte texto correctamente.
