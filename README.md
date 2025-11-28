@@ -30,7 +30,7 @@ Cambios por Angie Minota (Historial de Pagos)
 ## 🧑‍💻 Autores
 - **Juan Diego Eraso Muñoz**  
 - **Jaime Santiago Salazar Gil**  
-- **Angie Nicol Hurtado Minota (Angie Minota)**  
+- **Angie Nicol Hurtado Minota**  
 
 ---
 
