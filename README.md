@@ -18,6 +18,62 @@ detalles de un pago con la capacidad de asignar un pago como "Pagado", las cards
 pago deatils para ubicar diferentes mensajes compuestos por un titulo y un valor
 
 Cambios por Angie Minota (Historial de Pagos)
-Creé la pantalla Historial de Pagos.
-Implementé la lista de pagos y el modal de detalles.
-Ajusté navegación e integré el servicio de pagos.
+### 🟩 Historial de Pagos
+- Creación completa de **HistorialPagosScreen**  
+- Implementación de lista dinámica con datos del servicio  
+- Modal de detalles con opción de marcar como pagado  
+- Ajustes en la navegación  
+- Integración completa con `pagosService.ts`  
+
+---
+
+## 👥 Equipo de Desarrollo
+
+| Integrante | Rol |
+|-----------|------|
+| **Juan Diego Eraso Muñoz** | Desarrollo general, arquitectura base |
+| **Jaime Santiago Salazar Gil** | Diseño y componentes UI |
+| **Angie Nicol Hurtado Minota** | Manejo de navegación, apoyo en screens |
+| **Angie Minota** | Historial de pagos, integración servicios, optimización de componentes |
+
+---
+
+## 📂 Estructura del Proyecto
+
+/components
+BottomNavBar.tsx
+CustomInput.tsx
+PagoCard.tsx
+PagoDetailsModal.tsx
+PrimaryButton.tsx
+TotalBox.tsx
+
+/navigation
+AppNavigator.tsx
+types.ts
+
+/screens
+AddPagoScreen.tsx
+LoginScreen.tsx
+RegisterScreen.tsx
+MisPagosScreen.tsx
+HistorialPagosScreen.tsx
+ResumenPagosScreen.tsx
+PerfilUsuarioScreen.tsx
+
+/service
+authService.ts
+pagosService.ts
+
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+- React Native (Expo)
+- TypeScript
+- React Navigation
+- react-native-chart-kit
+- Expo Icons
+- Servicios y componentes reutilizables
+
+
