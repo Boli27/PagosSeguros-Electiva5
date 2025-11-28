@@ -31,11 +31,9 @@ Cambios por Angie Minota (Historial de Pagos)
 
 | Integrante | Rol |
 |-----------|------|
-| **Juan Diego Eraso Muñoz** | Desarrollo general, arquitectura base |
-| **Jaime Santiago Salazar Gil** | Diseño y componentes UI |
-| **Angie Nicol Hurtado Minota** | Manejo de navegación, apoyo en screens |
-| **Angie Minota** | Historial de pagos, integración servicios, optimización de componentes |
-
+| **Juan Diego Eraso Muñoz** 
+| **Jaime Santiago Salazar Gil** 
+| **Angie Nicol Hurtado Minota** 
 ---
 
 ## 📂 Estructura del Proyecto
